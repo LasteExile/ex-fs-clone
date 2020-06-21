@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block main_content %}
+    <div class="container">
+        <div style="height: 800px">
+            <form method="POST" action="{% url 'add' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <h5 class="pt-5">Enter <a href="https://www.imdb.com/">IMDB link</a> of movie or series:</h5>
+                    <label for="{{ form.imdb_link.id_for_label }}">IMDB link: </label>
+                    {{ form.imdb_link|add_class:'form-control' }}
+                    {{ form.imdb_link.errors }}
+                </div>
+                <button type="submit" class="btn btn-outline-dark">Submit</button>
+            </form>
+        </div>
+    </div>
+{% endblock main_content %}

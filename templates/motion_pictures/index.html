@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block dropdown_block %}
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+            Genres
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% for genre in genre_list %}
+                <a class="dropdown-item" href="#">{{ genre.name }}</a>
+            {% endfor %}
+        </div>
+    </li>
+{% endblock dropdown_block %}
+
+{% block main_content %}
+    <div class="p-2 pt-3">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="main-title pb-2">
+                    <a href="{% url 'films' %}">
+                        <h5>Films</h5>
+                    </a>
+                </div>
+            </div>
+            {% for film in film_list %}
+                <div class="col-xl-3 col-sm-6 mb-3">
+                    <div class="video-card">
+                        <div class="video-card-image">
+                            <a class="play-icon" href="{{ film.0.get_absolute_url }}"><i class="fas fa-play-circle"></i></a>
+                            <a href="{{ film.0.get_absolute_url }}"><img class="img-fluid" src="{{ film.0.poster_url }}" alt=""></a>
+                        </div>
+                        <div class="video-card-body">
+                            <div class="video-title">
+                                <a href="{{ film.0.get_absolute_url }}">{{ film.0.title }}</a>
+                            </div>
+                            <div class="video-page text-success">
+                                {{ film.1 }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <hr class="mt-0">
+        <div class="video-block section-padding">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="main-title pb-2">
+                        <a href="{% url 'series' %}">
+                            <h5>Series</h5>
+                        </a>
+                    </div>
+                </div>
+                {% for series in series_list %}
+                    <div class="col-xl-3 col-sm-6 mb-3">
+                        <div class="video-card">
+                            <div class="video-card-image">
+                                <a class="play-icon" href="{{ series.0.get_absolute_url }}"><i class="fas fa-play-circle"></i></a>
+                                <a href="{{ series.0.get_absolute_url }}"><img class="img-fluid" src="{{ series.0.poster_url }}" alt=""></a>
+                            </div>
+                            <div class="video-card-body">
+                                <div class="video-title">
+                                    <a href="{{ series.0.get_absolute_url }}">{{ series.0.title }}</a>
+                                </div>
+                                <div class="video-page text-success">
+                                    {{ series.1 }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock main_content %}
