@@ -4,6 +4,22 @@ from django.http import HttpResponseRedirect
 from . import models, forms, get_data
 
 
+class MotionPictureListView(ListView):
+    model = models.MotionPicture
+    template_name = 'motion_pictures/motionpictures.html'
+    paginate_by = 20
+
+    def get_queryset(self):
+        genre = models.Genre.objects.get(pk=self.request.GET.get('genre'))
+        queryset = models.MotionPicture.objects.filter(genres=genre)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['genre'] = models.Genre.objects.get(pk=self.request.GET.get('genre'))
+        return context
+
+
 class IndexListView(ListView):
     model = models.MotionPicture
     template_name = 'motion_pictures/index.html'

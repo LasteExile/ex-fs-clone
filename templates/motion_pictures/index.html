@@ -8,7 +8,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             {% for genre in genre_list %}
-                <a class="dropdown-item" href="#">{{ genre.name }}</a>
+                <a class="dropdown-item" href="{% url 'motionpictures' %}?genre={{ genre.pk }}">{{ genre.name }}</a>
             {% endfor %}
         </div>
     </li>

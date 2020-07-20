@@ -16,7 +16,7 @@
             <h6>Genres :</h6>
             <p class="tags mb-0">
                 {% for genre in genres %}
-                    <span><a href="">{{ genre.name }}</a></span>
+                    <span><a href="{% url 'motionpictures' %}?genre={{ genre.pk }}">{{ genre.name }}</a></span>
                 {% endfor %}
             </p>
             <hr>

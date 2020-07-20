@@ -1,31 +1,31 @@
 {% extends 'base.html' %}
 
-{% block films_active %}active{% endblock films_active %}
 
 {% block main_content %}
     <div class="p-2 pt-3">
         <div class="row">
             <div class="col-md-12">
                 <div class="main-title pb-2">
-                    <a href="{% url 'films' %}">
-                        <h5>Films</h5>
-                    </a>
+                    <h5>{{ genre.name }}:</h5>
                 </div>
             </div>
-            {% for film in motionpicture_list %}
+            {% for motionpicture in motionpicture_list %}
                 <div class="col-xl-3 col-sm-6 mb-3">
                     <div class="video-card">
                         <div class="video-card-image">
-                            <a class="play-icon" href="{{ film.get_absolute_url }}"><i class="fas fa-play-circle"></i></a>
-                            <a href="{{ film.get_absolute_url }}"><img class="img-fluid" src="{{ film.poster_url }}" alt=""></a>
+                            <a class="play-icon" href="{{ motionpicture.get_absolute_url }}"><i
+                                    class="fas fa-play-circle"></i></a>
+                            <a href="{{ motionpicture.get_absolute_url }}"><img class="img-fluid"
+                                                                                src="{{ motionpicture.poster_url }}"
+                                                                                alt=""></a>
                         </div>
                         <div class="video-card-body">
                             <div class="video-title">
-                                <a href="{{ film.get_absolute_url }}">{{ film.title }}</a>
+                                <a href="{{ motionpicture.get_absolute_url }}">{{ motionpicture.title }}</a>
                             </div>
                             <div class="video-page text-success">
                                 <p class="tags mb-0">
-                                    {% for genre in film.genres.all %}
+                                    {% for genre in motionpicture.genres.all %}
                                         <span><a href="{% url 'motionpictures' %}?genre={{ genre.pk }}">{{ genre.name }}</a></span>
                                     {% endfor %}
                                 </p>
@@ -41,17 +41,21 @@
         <nav aria-label="navigation">
             <ul class="pagination justify-content-center mt-50">
                 {% if page_obj.has_previous %}
-                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                    <li class="page-item"><a class="page-link"
+                                             href="&page={{ page_obj.previous_page_number }}">&laquo;</a>
+                    </li>
                 {% endif %}
                 {% for i in paginator.page_range %}
                     {% if page_obj.number == i %}
-                        <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        <li class="page-item active"><a class="page-link" href="&page={{ i }}">{{ i }}</a>
+                        </li>
                     {% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' %}
-                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        <li class="page-item"><a class="page-link" href="&page={{ i }}">{{ i }}</a></li>
                     {% endif %}
                 {% endfor %}
                 {% if page_obj.has_next %}
-                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                    <li class="page-item"><a class="page-link"
+                                             href="&page={{ page_obj.next_page_number }}">&raquo;</a></li>
                 {% endif %}
             </ul>
         </nav>
